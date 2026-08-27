@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model pessoas {
+  id        Int      @id @default(autoincrement())
+  nome      String   @db.VarChar(255)
+  contato   String   @db.VarChar(255)
+  email     String   @unique @db.VarChar(255)
+  admissao  DateTime
+
+  id_setor  Int
+  id_cargo  Int
+
+  setor     setores  @relation(fields: [id_setor], references: [id])
+  cargo     cargos   @relation(fields: [id_cargo], references: [id])
+
+  alertas   alertas[]
+  denuncias denuncias[]
+}
+
+model setores {
+  id        Int      @id @default(autoincrement())
+  nome      String   @db.VarChar(255)
+
+  pessoas   pessoas[]
+  denuncias denuncias[]
+}
+
+model cargos {
+  id        Int      @id @default(autoincrement())
+  nome      String   @db.VarChar(255)
+
+  pessoas   pessoas[]
+}
+
+model alertas {
+  id         Int      @id @default(autoincrement())
+  assunto    String   @db.VarChar(255)
+
+  id_pessoa  Int
+
+  pessoa     pessoas  @relation(fields: [id_pessoa], references: [id])
+}
+
+model denuncias {
+  id         Int      @id @default(autoincrement())
+  assunto    String   @db.VarChar(255)
+
+  id_pessoa  Int
+  id_setor   Int
+
+  pessoa     pessoas  @relation(fields: [id_pessoa], references: [id])
+  setor      setores  @relation(fields: [id_setor], references: [id])
+}
