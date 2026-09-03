@@ -1,9 +1,7 @@
 export class Cargo {
-    id: number | any;
-    nome: String;
+    nome: string;
 
-    constructor(nome: string, id: any = null) {
-        this.id = id;
+    constructor(nome: string) {
         this.nome = nome;
     }
 }

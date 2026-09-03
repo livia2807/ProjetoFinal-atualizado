@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { SetorRepository } from '@/src/repository/SetorRepository';
-import { SetorService } from '@/src/services/SetorService';
+import { SetorService } from '@/src/service/SetorService';
 
 const service = new SetorService(
     new SetorRepository()
