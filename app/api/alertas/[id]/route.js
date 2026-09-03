@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { AlertaRepository } from '@/src/repository/AlertaRepository';
-import { AlertaService } from '@/src/services/AlertaService';
+import { AlertaService } from '@/sec/service/AlertaService';
 
 const service = new AlertaService(
     new AlertaRepository()

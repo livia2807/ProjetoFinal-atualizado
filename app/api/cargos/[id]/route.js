@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { CargoRepository } from '@/src/repository/CargoRepository';
-import { CargoService } from '@/src/services/CargoService';
+import { CargoService } from '@/src/service/CargoService';
 
 const service = new CargoService(
     new CargoRepository()

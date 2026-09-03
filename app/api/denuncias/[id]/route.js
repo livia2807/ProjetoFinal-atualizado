@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { DenunciaRepository } from '@/src/repository/DenunciaRepository';
-import { DenunciaService } from '@/src/services/DenunciaService';
+import { DenunciaService } from '@/src/service/DenunciaService';
 
 const service = new DenunciaService(
     new DenunciaRepository()

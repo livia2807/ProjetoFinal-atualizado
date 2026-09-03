@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { PessoaRepository } from '@/src/repository/PessoaRepository';
-import { PessoaService } from '@/src/services/PessoaService';
+import { PessoaService } from '@/src/service/PessoaService';
 
 const service = new PessoaService(
     new PessoaRepository()

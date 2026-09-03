@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { DenunciaRepository } from '@/src/repository/DenunciaRepository';
-import { DenunciaService } from '../../../src/service/DenunicaService';
+import { DenunciaService } from '@/src/service/DenunciaService';
 
 const service = new DenunciaService(
   new DenunciaRepository()
@@ -28,8 +28,9 @@ export async function POST(req) {
     const body = await req.json();
 
     const denuncia = await service.cadastrar(
-      body.descricao,
-      body.data,
+      //body.descricao, //errado
+      //body.data, //errado
+      body.assunto,
       body.id_pessoa,
       body.id_setor
     );
