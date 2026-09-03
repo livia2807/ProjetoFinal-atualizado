@@ -11,7 +11,7 @@ export default function FuncionarioLayout({ children }: { children: React.ReactN
       </div>
       <div className="bg-white border-b border-[#e0e0e0] px-5 max-w-2xl mx-auto w-full flex gap-4">
         <Link href="/painel" className="px-2 py-3 text-sm font-600 text-[#777777]">Início</Link>
-        <Link href="/denuncias/nova" className="px-2 py-3 text-sm font-600 text-[#777777]">Nova Denúncia</Link>
+        <Link href="/denuncias/nova" className="px-2 py-3 text-sm font-600 text-[#777777]">Minhas Denúncias</Link>
       </div>
       <div className="flex-1 max-w-2xl mx-auto w-full px-5 py-6">
         {children}

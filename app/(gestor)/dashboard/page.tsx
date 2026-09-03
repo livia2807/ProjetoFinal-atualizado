@@ -6,7 +6,8 @@ import api from '@/app/lib/api'
 export default function DashboardPage() {
   const [data, setData] = useState({
     totalFuncionarios: 0,
-    totalDenuncias: 0
+    totalDenuncias: 0,
+    totalAlertas: 0,
   })
   const [loading, setLoading] = useState(true)
 
@@ -19,7 +20,8 @@ export default function DashboardPage() {
         ])
         setData({
           totalFuncionarios: funcRes.data.length || 0,
-          totalDenuncias: denRes.data.length || 0
+          totalDenuncias: denRes.data.length || 0,
+          totalAlertas: denRes.data.filter((d: any) => d.status === 'alerta').length || 0,
         })
       } catch (error) {
         console.error('Erro ao carregar dashboard:', error)
@@ -43,6 +45,7 @@ export default function DashboardPage() {
       <EstatisticasDashboard 
         totalFuncionarios={data.totalFuncionarios} 
         totalDenuncias={data.totalDenuncias} 
+        totalAlertas={data.totalAlertas}
       />
     </div>
   )
