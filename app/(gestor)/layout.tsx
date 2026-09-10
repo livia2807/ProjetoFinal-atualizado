@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import NavegacaoGestor from '@/components/layout/NavegacaoPrincipal'
 
 export default function GestorLayout({ children }: { children: React.ReactNode }) {
@@ -9,6 +10,12 @@ export default function GestorLayout({ children }: { children: React.ReactNode }
             <div className="font-display text-white text-lg leading-none">RotaSegura</div>
             <div className="text-white/50 text-xs">Painel do Gestor</div>
           </div>
+          <Link
+href="/"
+            className="text-white/80 hover:text-white text-xs font-600 border border-white/30 rounded-lg px-3 py-1.5 transition-colors"
+          >
+            Sair
+          </Link>
         </div>
       </div>
       <NavegacaoGestor />

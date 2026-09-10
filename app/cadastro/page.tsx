@@ -110,9 +110,9 @@ export default function CadastroPage() {
             </div>
           </div>
 
-          <div className="rs-form-actions">
-            <Link href="/funcionarios" className="rs-link-back">Voltar</Link>
-            <button type="submit" className="rs-btn-primary" disabled={salvando}>
+          <div className="rs-form-actions flex items-center gap-3 mt-7">
+            <Link href="/funcionarios" className="px-8 py-3 rounded-xl bg-amber-500 text-white font-700 hover:bg-amber-600">Voltar</Link>
+            <button type="submit" className="px-8 py-3 rounded-xl bg-amber-500 text-white font-700 hover:bg-amber-600" disabled={salvando}>
               {salvando ? 'Salvando...' : 'Salvar'}
             </button>
           </div>

@@ -6,7 +6,9 @@ export default function FuncionarioLayout({ children }: { children: React.ReactN
       <div className="bg-[#777777] px-5 py-4">
         <div className="flex items-center justify-between max-w-2xl mx-auto">
           <div className="text-white font-700 text-sm leading-none">Área do Funcionário</div>
-          <Link href="/" className="text-white/70 hover:text-white text-xs">Sair</Link>
+          <Link href="/" className="text-white/80 hover:text-white text-xs font-600 border border-white/30 rounded-lg px-3 py-1.5 transition-colors">
+            Sair
+          </Link>
         </div>
       </div>
       <div className="bg-white border-b border-[#e0e0e0] px-5 max-w-2xl mx-auto w-full flex gap-4">

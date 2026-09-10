@@ -62,7 +62,7 @@ export default function GestorAlertasPage() {
       <div className="space-y-3">
         {alertas.map((a: any) => (
           <div key={a.id} className="bg-amber-50 border border-amber-200 rounded-2xl p-4">
-            <div className="font-700 text-[#444444] text-sm">Para: {a.pessoa?.nome || 'Desconhecido'}</div>
+            <div className="font-700 text-[#444444] text-sm">Para: {a.pessoa?.nome || 'Funcionário'}</div>
             <p className="text-amber-900 text-sm mt-1">{a.assunto}</p>
           </div>
         ))}

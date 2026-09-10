@@ -169,7 +169,7 @@ export default function FormularioDenuncia() {
         <button
           type="submit"
           disabled={!assunto || submetendo || !idPessoa}
-          className="w-full py-3.5 rounded-xl bg-[#777777] text-white font-bold text-sm disabled:opacity-40 hover:bg-[#555555] transition-colors"
+          className="w-full py-3.5 rounded-xl bg-[#777777] text-white font-bold text-sm disabled:opacity-40 hover:bg-[#555555]"
         >
           {submetendo ? 'Enviando...' : 'Enviar Denúncia'}
         </button>
@@ -202,9 +202,7 @@ export default function FormularioDenuncia() {
                   </span>
                 </div>
 
-                <p className="text-sm text-[#444444]">
-                  {denuncia.assunto}
-                </p>
+                <p className="text-sm text-[#444444]"> {denuncia.assunto} </p>
               </div>
             ))}
           </div>

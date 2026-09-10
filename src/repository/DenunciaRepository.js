@@ -13,7 +13,21 @@ export class DenunciaRepository {
         });
     }
 
+
     async listarTodos() {
+    const dados = await prisma.denuncias.findMany({
+        include: {
+            pessoa: true,
+            setor: true
+        },
+        orderBy: { id: 'desc' }
+    });
+
+    // Retorna o objeto completo (com pessoa e setor)
+    return dados;
+}
+
+ /*   async listarTodos() {
         const dados = await prisma.denuncias.findMany({
             include: {
                 pessoa: true,
@@ -29,7 +43,7 @@ export class DenunciaRepository {
                 d.id
             )
         );
-    }
+    }*/
 
     async buscarPorId(id) {
         const dado = await prisma.denuncias.findUnique({
