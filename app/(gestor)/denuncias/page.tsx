@@ -17,7 +17,7 @@ export default function GestorDenunciasPage() {
           <div key={d.id} className="bg-white rounded-2xl border border-[#e0e0e0] p-4">
             <div className="font-700 text-[#444444] text-sm mb-1">{d.assunto}</div>
             <div className="text-xs text-[#777777] mb-2">
-              Por: {d.pessoa?.nome || 'Desconhecido'} &middot; Setor: {d.setor?.nome || 'N/A'}
+              Por: {d.pessoa?.nome || 'Funcionário'} &middot; Setor: {d.setor?.nome || 'N/A'}
             </div>
           </div>
         ))}

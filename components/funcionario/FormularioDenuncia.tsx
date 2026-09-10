@@ -86,6 +86,10 @@ export default function FormularioDenuncia() {
     }
   }
 
+  function setArea(value: string): void {
+    throw new Error('Function not implemented.')
+  }
+
   return (
     <div className="space-y-4">
 
@@ -101,8 +105,8 @@ export default function FormularioDenuncia() {
           </label>
 
           <textarea
-            value={assunto}
-            onChange={(e) => setAssunto(e.target.value)}
+            value={local}
+            onChange={(e) => setLocal(e.target.value)}
             placeholder="Ex: Setor A - Próximo ao galpão"
             rows={4}
             required
