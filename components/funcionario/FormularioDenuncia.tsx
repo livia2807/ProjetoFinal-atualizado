@@ -24,16 +24,31 @@ export default function FormularioDenuncia() {
   const [assunto, setAssunto] = useState('')
   const [submetendo, setSubmetendo] = useState(false)
   const [idPessoa, setIdPessoa] = useState<number | null>(null)
+  const [idSetor, setIdSetor] = useState<number | null>(null)
   const [historico, setHistorico] = useState<any[]>([])
   const [carregandoHistorico, setCarregandoHistorico] = useState(true)
 
   useEffect(() => {
     const idSalvo = localStorage.getItem('funcionarioId')
-    if (idSalvo) {
-      setIdPessoa(Number(idSalvo))
-    } else {
+    if (!idSalvo) {
       router.push('/entrar')
+      return
     }
+    const id = Number(idSalvo)
+    setIdPessoa(id)
+
+    // Busca o setor real do funcionário logado
+    api
+      .get('/pessoas')
+      .then((res) => {
+        const pessoa = (res.data || []).find((p: any) => Number(p.id) === id)
+        if (pessoa?.id_setor) {
+          setIdSetor(Number(pessoa.id_setor))
+        } else if (pessoa?.setor?.id) {
+          setIdSetor(Number(pessoa.setor.id))
+        }
+      })
+      .catch((err) => console.error('Erro ao buscar setor do funcionário:', err))
   }, [router])
 
   const carregarHistorico = async (id: number) => {
@@ -58,6 +73,16 @@ export default function FormularioDenuncia() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!idPessoa) return
+
+    if (!idSetor) {
+      Swal.fire(
+        'Erro',
+        'Não foi possível identificar o setor do funcionário. Faça login novamente.',
+        'error'
+      )
+      return
+    }
+
     setSubmetendo(true)
     try {
       const descricao = [
@@ -72,7 +97,7 @@ export default function FormularioDenuncia() {
       await api.post('/denuncias', {
         assunto: descricao || assunto,
         id_pessoa: idPessoa,
-        id_setor: 1,
+        id_setor: idSetor, // setor real do funcionário (não mais fixo em 1)
       })
 
       await Swal.fire({
@@ -165,14 +190,13 @@ export default function FormularioDenuncia() {
 
         <button
           type="submit"
-          disabled={!local || !categoria || !grau || !assunto || submetendo}
+          disabled={!local || !categoria || !grau || !assunto || submetendo || !idSetor}
           className="rs-btn rs-btn-green w-full py-3"
         >
           {submetendo ? 'Enviando...' : 'Enviar denúncia'}
         </button>
       </form>
 
-      {/* Histórico*/}
       <div className="bg-white rounded-2xl border border-[#e0e0e0] p-5">
         <h3 className="font-bold text-[#444444] text-sm mb-4">
           Minhas denúncias enviadas
