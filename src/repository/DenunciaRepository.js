@@ -1,5 +1,4 @@
 import prisma from '@/src/lib/prisma';
-import { Denuncia } from '../models/Denuncia';
 
 export class DenunciaRepository {
 
@@ -7,79 +6,38 @@ export class DenunciaRepository {
         return await prisma.denuncias.create({
             data: {
                 assunto: obj.assunto,
-                id_pessoa: obj.id_pessoa,
-                id_setor: obj.id_setor
-            }
+                id_pessoa: Number(obj.id_pessoa),
+                id_setor: Number(obj.id_setor),
+            },
         });
     }
 
-
     async listarTodos() {
-    const dados = await prisma.denuncias.findMany({
-        include: {
-            pessoa: true,
-            setor: true
-        },
-        orderBy: { id: 'desc' }
-    });
-
-    // Retorna o objeto completo (com pessoa e setor)
-    return dados;
-}
-
- /*   async listarTodos() {
-        const dados = await prisma.denuncias.findMany({
-            include: {
-                pessoa: true,
-                setor: true
-            }
+        return await prisma.denuncias.findMany({
+            orderBy: { id: 'desc' },
         });
-
-        return dados.map(d =>
-            new Denuncia(
-                d.assunto,
-                d.id_pessoa,
-                d.id_setor,
-                d.id
-            )
-        );
-    }*/
+    }
 
     async buscarPorId(id) {
-        const dado = await prisma.denuncias.findUnique({
-            where: {
-                id: Number(id)
-            }
+        return await prisma.denuncias.findUnique({
+            where: { id: Number(id) },
         });
-
-        if (!dado) return null;
-
-        return new Denuncia(
-            dado.assunto,
-            dado.id_pessoa,
-            dado.id_setor,
-            dado.id
-        );
     }
 
     async atualizar(id, obj) {
         return await prisma.denuncias.update({
-            where: {
-                id: Number(id)
-            },
+            where: { id: Number(id) },
             data: {
                 assunto: obj.assunto,
-                id_pessoa: obj.id_pessoa,
-                id_setor: obj.id_setor
-            }
+                id_pessoa: Number(obj.id_pessoa),
+                id_setor: Number(obj.id_setor),
+            },
         });
     }
 
     async excluir(id) {
         return await prisma.denuncias.delete({
-            where: {
-                id: Number(id)
-            }
+            where: { id: Number(id) },
         });
     }
 }

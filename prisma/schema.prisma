@@ -15,9 +15,6 @@ model pessoas {
   admissao DateTime
   id_setor Int
   id_cargo Int
-
-  @@index([id_cargo], map: "pessoas_id_cargo_fkey")
-  @@index([id_setor], map: "pessoas_id_setor_fkey")
 }
 
 model setores {
@@ -34,8 +31,6 @@ model alertas {
   id        Int    @id @default(autoincrement())
   assunto   String @db.VarChar(255)
   id_pessoa Int
-
-  @@index([id_pessoa], map: "alertas_id_pessoa_fkey")
 }
 
 model denuncias {
@@ -43,9 +38,6 @@ model denuncias {
   assunto   String @db.VarChar(255)
   id_pessoa Int
   id_setor  Int
-
-  @@index([id_pessoa], map: "denuncias_id_pessoa_fkey")
-  @@index([id_setor], map: "denuncias_id_setor_fkey")
 }
 
 model gestores {

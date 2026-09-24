@@ -35,7 +35,7 @@ export default function FuncionariosPage() {
         </div>
 
         <Link
-          href="/cadastro"
+          href="/cadastroFuncionario"
           className="px-4 py-2.5 rounded-xl bg-[#777777] text-white text-sm font-700 hover:bg-[#555555] transition-colors"
         >
           + Novo Funcionário
