@@ -51,10 +51,18 @@ model alertas {
 model denuncias {
   id         Int      @id @default(autoincrement())
   assunto    String   @db.VarChar(255)
+  status     String   @default("a_fazer") @db.VarChar(50)  // ← novo
 
   id_pessoa  Int
   id_setor   Int
 
   pessoa     pessoas  @relation(fields: [id_pessoa], references: [id])
   setor      setores  @relation(fields: [id_setor], references: [id])
+}
+
+model gestores {
+  id       Int    @id @default(autoincrement())
+  nome     String @db.VarChar(255)
+  email    String @unique @db.VarChar(255)
+  senha    String @db.VarChar(255)
 }

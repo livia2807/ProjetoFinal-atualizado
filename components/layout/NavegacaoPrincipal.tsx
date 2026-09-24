@@ -9,6 +9,7 @@ export default function NavegacaoPrincipal() {
     { href: '/funcionarios', label: 'Funcionários' },
     { href: '/denuncias', label: 'Denúncias' },
     { href: '/alertas', label: 'Alertas' },
+    { href: '/kanban', label: 'Kanban' },
   ]
   return (
     <div className="bg-white border-b border-[#e0e0e0] px-5">

@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import EstatisticasDashboard from '@/components/gestor/EstatisticasDashboard'
+import GraficoPizza from '@/components/gestor/GraficoPizza'
 import api from '@/app/lib/api'
 
 export default function DashboardPage() {
@@ -14,14 +15,22 @@ export default function DashboardPage() {
   useEffect(() => {
     async function carregar() {
       try {
-        const [funcRes, denRes] = await Promise.all([
+        const [funcRes, denRes, alertasRes] = await Promise.all([
           api.get('/pessoas'),
-          api.get('/denuncias')
+          api.get('/denuncias'),
+          api.get('/alertas'),
         ])
+
+        const funcionarios = Array.isArray(funcRes.data) ? funcRes.data : []
+        const denuncias = Array.isArray(denRes.data) ? denRes.data : []
+        const alertas = Array.isArray(alertasRes.data) ? alertasRes.data : []
+
+        console.log('ALERTAS DA API:', alertas) // ← veja no console do navegador (F12)
+
         setData({
-          totalFuncionarios: funcRes.data.length || 0,
-          totalDenuncias: denRes.data.length || 0,
-          totalAlertas: denRes.data.filter((d: any) => d.status === 'alerta').length || 0,
+          totalFuncionarios: funcionarios.length,
+          totalDenuncias: denuncias.length,
+          totalAlertas: alertas.length,
         })
       } catch (error) {
         console.error('Erro ao carregar dashboard:', error)
@@ -47,39 +56,11 @@ export default function DashboardPage() {
         totalDenuncias={data.totalDenuncias} 
         totalAlertas={data.totalAlertas}
       />
-    </div>
-  )
-}
-
-/*import api from '@/app/lib/api'
-import EstatisticasDashboard from '@/components/gestor/EstatisticasDashboard'
-
-// Função que roda no servidor do Next.js
-async function getDashboardData() {
-  // Chamadas paralelas para otimizar o tempo de resposta
-  const [funcRes, denRes] = await Promise.all([
-    api.get('/pessoas'),
-    api.get('/denuncias')
-  ])
-  return {
-    totalFuncionarios: funcRes.data.length,
-    totalDenuncias: denRes.data.length
-  }
-}
-
-export default async function DashboardPage() {
-  const data = await getDashboardData()
-
-  return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="font-display text-2xl text-[#444444] mb-1">Visão Geral</h2>
-        <p className="text-[#777777] text-sm">Monitoramento em tempo real da empresa</p>
-      </div>
-      <EstatisticasDashboard 
-        totalFuncionarios={data.totalFuncionarios} 
-        totalDenuncias={data.totalDenuncias} 
+      <GraficoPizza
+        totalFuncionarios={data.totalFuncionarios}
+        totalDenuncias={data.totalDenuncias}
+        totalAlertas={data.totalAlertas}
       />
     </div>
   )
-}*/
+}

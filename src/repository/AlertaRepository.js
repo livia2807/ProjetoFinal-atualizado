@@ -13,20 +13,15 @@ export class AlertaRepository {
     }
 
     async listarTodos() {
-        const dados = await prisma.alertas.findMany({
-            include: {
-                pessoa: true
-            }
-        });
-
-        return dados.map(d =>
-            new Alerta(
-                d.assunto,
-                d.id_pessoa,
-                d.id
-            )
-        );
-    }
+    return await prisma.alertas.findMany({
+        include: {
+            pessoa: true
+        },
+        orderBy: {
+            id: 'desc'
+        }
+    });
+}
 
     async buscarPorId(id) {
         const dado = await prisma.alertas.findUnique({
