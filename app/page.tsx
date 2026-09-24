@@ -51,7 +51,7 @@ export default function HomePage() {
             </p>
 
             <Link
-              href="/entrar"
+              href="/cadastro-gestor"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#6b6b6b] text-white text-sm font-600 hover:bg-[#4a4a4a] transition-colors"
             >
               Comece aqui →

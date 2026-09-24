@@ -8,61 +8,49 @@ datasource db {
 }
 
 model pessoas {
-  id        Int      @id @default(autoincrement())
-  nome      String   @db.VarChar(255)
-  contato   String   @db.VarChar(255)
-  email     String   @unique @db.VarChar(255)
-  admissao  DateTime
+  id       Int      @id @default(autoincrement())
+  nome     String   @db.VarChar(255)
+  contato  String   @db.VarChar(255)
+  email    String   @unique @db.VarChar(255)
+  admissao DateTime
+  id_setor Int
+  id_cargo Int
 
-  id_setor  Int
-  id_cargo  Int
-
-  setor     setores  @relation(fields: [id_setor], references: [id])
-  cargo     cargos   @relation(fields: [id_cargo], references: [id])
-
-  alertas   alertas[]
-  denuncias denuncias[]
+  @@index([id_cargo], map: "pessoas_id_cargo_fkey")
+  @@index([id_setor], map: "pessoas_id_setor_fkey")
 }
 
 model setores {
-  id        Int      @id @default(autoincrement())
-  nome      String   @db.VarChar(255)
-
-  pessoas   pessoas[]
-  denuncias denuncias[]
+  id   Int    @id @default(autoincrement())
+  nome String @db.VarChar(255)
 }
 
 model cargos {
-  id        Int      @id @default(autoincrement())
-  nome      String   @db.VarChar(255)
-
-  pessoas   pessoas[]
+  id   Int    @id @default(autoincrement())
+  nome String @db.VarChar(255)
 }
 
 model alertas {
-  id         Int      @id @default(autoincrement())
-  assunto    String   @db.VarChar(255)
+  id        Int    @id @default(autoincrement())
+  assunto   String @db.VarChar(255)
+  id_pessoa Int
 
-  id_pessoa  Int
-
-  pessoa     pessoas  @relation(fields: [id_pessoa], references: [id])
+  @@index([id_pessoa], map: "alertas_id_pessoa_fkey")
 }
 
 model denuncias {
-  id         Int      @id @default(autoincrement())
-  assunto    String   @db.VarChar(255)
-  status     String   @default("a_fazer") @db.VarChar(50)  // ← novo
+  id        Int    @id @default(autoincrement())
+  assunto   String @db.VarChar(255)
+  id_pessoa Int
+  id_setor  Int
 
-  id_pessoa  Int
-  id_setor   Int
-
-  pessoa     pessoas  @relation(fields: [id_pessoa], references: [id])
-  setor      setores  @relation(fields: [id_setor], references: [id])
+  @@index([id_pessoa], map: "denuncias_id_pessoa_fkey")
+  @@index([id_setor], map: "denuncias_id_setor_fkey")
 }
 
 model gestores {
-  id       Int    @id @default(autoincrement())
-  nome     String @db.VarChar(255)
-  email    String @unique @db.VarChar(255)
-  senha    String @db.VarChar(255)
+  id    Int    @id @default(autoincrement())
+  nome  String @db.VarChar(255)
+  email String @unique @db.VarChar(255)
+  senha String @db.VarChar(255)
 }
